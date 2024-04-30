@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   afterSplash() {
     final SignInBloc sb = context.read<SignInBloc>();
     Future.delayed(Duration(milliseconds: 1200)).then((value) {
-      sb.isSignedIn == true || sb.guestUser == true
+      sb.isSignedIn == true 
           ? gotoHomePage()
           : gotoSignInPage();
     });

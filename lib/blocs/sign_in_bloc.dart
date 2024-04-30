@@ -129,7 +129,7 @@ class SignInBloc extends ChangeNotifier {
 
 
       } catch (e) {
-        print("got this error $e");
+        print("-------------------------------------------------\n ------------- got this error $e -------------------\n-----------------------------\n   ");
       }
  
     }

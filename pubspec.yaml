@@ -20,7 +20,7 @@ dependencies:
   dots_indicator: ^3.0.0
   easy_localization: ^3.0.2
   firebase_analytics: ^10.4.1
-  firebase_auth: ^4.6.1
+  firebase_auth: ^4.19.2
   firebase_core: ^2.13.0
   firebase_messaging: ^14.6.1
   firebase_storage: ^11.2.1

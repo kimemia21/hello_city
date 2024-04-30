@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:travel_hour/authentication/Authentication.dart';
 import 'package:travel_hour/blocs/sign_in_bloc.dart';
 import 'package:travel_hour/config/config.dart';
 import 'package:travel_hour/pages/done.dart';
@@ -43,6 +44,9 @@ class _SignInPageState extends State<SignInPage> {
       if(hasInternet == false){
         openSnacbar(context, 'check your internet connection!'.tr());
       }else{
+  
+        
+      
         await sb.signInWithGoogle(context: context).then((_){
         if(sb.hasError == true){
           openSnacbar(context, 'something is wrong. please try again.'.tr());
@@ -270,15 +274,19 @@ class _SignInPageState extends State<SignInPage> {
                     height: 50,
                     width: MediaQuery.of(context).size.width * 0.80,
                     child: TextButton(
-                        onPressed: () => handleGoogleSignIn(),
+                        onPressed: () => 
+                        
+                        Authentication.signInWithGoogle(context: context),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.blueAccent),
                           shape: MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5)
                           ))
                         ),
-                        child: googleSignInStarted == false
-                            ? Row(
+                        child:
+                        //  googleSignInStarted == false
+                        //     ?
+                             Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -298,10 +306,11 @@ class _SignInPageState extends State<SignInPage> {
                                   )
                                 ],
                               )
-                            : Center(
-                                child: CircularProgressIndicator(
-                                    backgroundColor: Colors.white),
-                              )),
+                            // : Center(
+                            //     child: CircularProgressIndicator(
+                            //         backgroundColor: Colors.white),
+                            //   )
+                              ),
                   ),
                   SizedBox(
                     height: 15,

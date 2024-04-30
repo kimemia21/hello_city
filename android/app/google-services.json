@@ -14,41 +14,13 @@
       },
       "oauth_client": [
         {
-          "client_id": "603340341027-vktdbgtg6acnh79rq4ei76fg84mfu223.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyB70PEjajqwvyKPGwGCXkRq3yl-HgIJfF0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "603340341027-vktdbgtg6acnh79rq4ei76fg84mfu223.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "603340341027-3b0ln6n4i8r9207u53qd80oqcq7s91cq.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.application"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:603340341027:android:265d97da633c1b1c181696",
-        "android_client_info": {
-          "package_name": "com.mrblab.travel_hour"
-        }
-      },
-      "oauth_client": [
+          "client_id": "603340341027-90ukfbjo8uv92a2u2tg5n3uagchhnac1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.application",
+            "certificate_hash": "66a80ec95d760f42e75505d3cb23ebca705cc7fe"
+          }
+        },
         {
           "client_id": "603340341027-vktdbgtg6acnh79rq4ei76fg84mfu223.apps.googleusercontent.com",
           "client_type": 3
