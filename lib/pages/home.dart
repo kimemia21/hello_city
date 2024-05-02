@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   void onTabTapped(int index) {
     setState(() => _currentIndex = index);
     _pageController.animateToPage(index,
-        curve: Curves.easeIn, duration: Duration(milliseconds: 300));
+        curve: Curves.decelerate, duration: Duration(milliseconds: 500));
   }
 
   // Future configureAds ()async{
@@ -107,13 +107,13 @@ class _HomePageState extends State<HomePage> {
             activeIndex: _currentIndex,
             inactiveColor: Colors.grey[500],
             splashColor: Theme.of(context).primaryColor,
-            //blurEffect: true,
+            // blurEffect: true,
             iconSize: 22,
             onTap: (index) => onTabTapped(index),
           ),
           body: PageView(
             controller: _pageController,
-            physics: NeverScrollableScrollPhysics(),
+            physics:NeverScrollableScrollPhysics(),
             children: <Widget>[
               Explore(),
               StatesPage(),

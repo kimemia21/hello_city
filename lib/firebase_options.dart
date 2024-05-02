@@ -50,11 +50,11 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB8NLVR9bgNzps5-3UsXrH_bGsl4eIXOaM',
-    appId: '1:914302031045:android:fa370377e8f06109394cac',
-    messagingSenderId: '914302031045',
-    projectId: 'hello-city-app',
-    storageBucket: 'hello-city-app.appspot.com',
+    apiKey: 'AIzaSyB70PEjajqwvyKPGwGCXkRq3yl-HgIJfF0',
+    appId: '1:603340341027:android:c7f14343316a1c9b181696',
+    messagingSenderId: '603340341027',
+    projectId: 'hellocity-69f72',
+    storageBucket: 'hellocity-69f72.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

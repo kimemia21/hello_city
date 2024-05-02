@@ -3,11 +3,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Config {
 
-  final String appName = 'Travel Hour'; 
+  final String appName = 'Hello City'; 
   final String mapAPIKey = 'AIzaSyClsHb5kKW*************';
-  final String countryName = 'Bangladesh';
+  final String countryName = 'Nairobi';
   final String splashIcon = 'assets/images/splash.png';
-  final String supportEmail = 'YOUR_EMAIL';
+  final String supportEmail = 'bobbymbogo71@gmail.com';
   final String privacyPolicyUrl = 'https://www.mrb-lab.com/privacy-policy-of-travel-hour';
   final String iOSAppId = '000000';
 

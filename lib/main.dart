@@ -5,26 +5,22 @@ import 'app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.dark
-  ));
-  runApp(
-    EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('es'), Locale('ar')],
-      path: 'assets/translations',
-      fallbackLocale: Locale('en'),
-      startLocale: Locale('en'),
-      useOnlyLangCode: true,
-      child: const MyApp(),
-    )
-  );
-}
+   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+ 
 
+
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark));
+  runApp(EasyLocalization(
+    supportedLocales: [Locale('en'), Locale('es'), Locale('ar')],
+    path: 'assets/translations',
+    fallbackLocale: Locale('en'),
+    startLocale: Locale('en'),
+    useOnlyLangCode: true,
+    child: const MyApp(),
+  ));
+}
