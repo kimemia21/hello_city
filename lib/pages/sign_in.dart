@@ -47,7 +47,7 @@ class _SignInPageState extends State<SignInPage> {
   
         
       
-        await sb.signInWithGoogle(context: context).then((_){
+        await sb.signInWithGoogle().then((_){
         if(sb.hasError == true){
           openSnacbar(context, 'something is wrong. please try again.'.tr());
           setState(() =>googleSignInStarted = false);

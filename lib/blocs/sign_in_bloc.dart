@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -21,7 +23,7 @@ class SignInBloc extends ChangeNotifier {
   final FacebookAuth _fbAuth = FacebookAuth.instance;
   final String defaultUserImageUrl =
       'https://www.seekpng.com/png/detail/115-1150053_avatar-png-transparent-png-royalty-free-default-user.png';
-      
+
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   bool _guestUser = false;
@@ -69,56 +71,84 @@ class SignInBloc extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future signInWithGoogle({required BuildContext context}) async {
+  Future signInWithGoogle() async {
+    print(
+        "----------------------------------------------Acessed--------------------------------------");
+    // final ref = firestore.collection('featured');
+    // ref.doc("featured_list").set({
+    //   "places":["nairobi","mombasa","kisumu"],
+    // });
 
-      final GoogleSignInAccount? googleUser = await _googlSignIn.signIn();
-  if (googleUser != null) {
-    try {
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+    // String generateRandomId() {
+    //   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    //   final random = Random();
+    //   return List.generate(20, (index) => chars[random.nextInt(chars.length)])
+    //       .join();
+    // }
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
+    // final id = generateRandomId();
+    // DateTime now = DateTime.now();
+    // DateFormat formatter = DateFormat('HH:mm, EEEE MMMM dd yyyy');
+    // String dateNow = formatter.format(now);
 
-      User userDetails = (await _firebaseAuth.signInWithCredential(credential)).user!;
+    // dynamic ref;
 
-      this._name = userDetails.displayName;
-      this._email = userDetails.email;
-      this._imageUrl = userDetails.photoURL;
-      this._uid = userDetails.uid;
-      this._signInProvider = 'google';
+    // addDetails() {
+    //   ref = firestore.collection("places").doc(id).set({
+    //     "state": 'nairobi',
+    //     "name": 'nairobi market',
+    //     "location": 'CBD',
+    //     "latitude": '1.286389',
+    //     "longitude": '36.817223',
+    //     "description": 'nairobi town is a town in nairobi',
+    //     "imageUrl1":
+    //         'https://c8.alamy.com/comp/T43F7A/the-hilton-nairobi-hotel-building-and-central-business-district-cbd-nairobi-kenya-T43F7A.jpg',
+    //     "imageUrl2":
+    //         'https://as1.ftcdn.net/v2/jpg/05/99/69/38/1000_F_599693872_ea7KjY6zgJAagy296zAoFwbnBLTEH7Q7.jpg',
+    //     "imageUrl3":
+    //         'https://i.natgeofe.com/n/e3d8e994-ede1-45d9-91da-cf06e60d4bf3/nairobi_nairobi-skyline.jpg',
+    //     "loves": '10',
+    //     "commentsCount": 'comments count',
+    //     "date": dateNow,
+    //     "timestamp": dateNow
+    //   });
 
-      _hasError = false;
-      notifyListeners();
-    } catch (e) {
+    //   return ref;
+    // }
+
+    // addDetails();
+
+    final GoogleSignInAccount? googleUser = await _googlSignIn.signIn();
+    if (googleUser != null) {
+      try {
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        User userDetails =
+            (await _firebaseAuth.signInWithCredential(credential)).user!;
+
+        this._name = userDetails.displayName;
+        this._email = userDetails.email;
+        this._imageUrl = userDetails.photoURL;
+        this._uid = userDetails.uid;
+        this._signInProvider = 'google';
+
+        _hasError = false;
+        notifyListeners();
+      } catch (e) {
+        _hasError = true;
+        _errorCode = e.toString();
+        notifyListeners();
+      }
+    } else {
       _hasError = true;
-      _errorCode = e.toString();
       notifyListeners();
     }
-  } else {
-    _hasError = true;
-    notifyListeners();
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // User? user;
 
@@ -161,7 +191,7 @@ class SignInBloc extends ChangeNotifier {
     //       this._signInProvider = 'google';
     //       _hasError = false;
     //       notifyListeners();
-          
+
     //     } on FirebaseAuthException catch (e) {
     //       if (e.code == 'account-exists-with-different-credential') {
     //         // ...
@@ -176,11 +206,10 @@ class SignInBloc extends ChangeNotifier {
     //     }
     //   }
 
-
     //   } catch (e) {
     //     print("-------------------------------------------------\n ------------- got this error $e -------------------\n-----------------------------\n   ");
     //   }
- 
+
     // }
   }
 
