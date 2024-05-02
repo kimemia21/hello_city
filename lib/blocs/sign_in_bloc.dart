@@ -79,44 +79,44 @@ class SignInBloc extends ChangeNotifier {
     //   "places":["nairobi","mombasa","kisumu"],
     // });
 
-    // String generateRandomId() {
-    //   const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    //   final random = Random();
-    //   return List.generate(20, (index) => chars[random.nextInt(chars.length)])
-    //       .join();
-    // }
+    String generateRandomId() {
+      const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+      final random = Random();
+      return List.generate(20, (index) => chars[random.nextInt(chars.length)])
+          .join();
+    }
 
-    // final id = generateRandomId();
-    // DateTime now = DateTime.now();
-    // DateFormat formatter = DateFormat('HH:mm, EEEE MMMM dd yyyy');
-    // String dateNow = formatter.format(now);
+    final id = generateRandomId();
+    DateTime now = DateTime.now();
+    DateFormat formatter = DateFormat('HH:mm, EEEE MMMM dd yyyy');
+    String dateNow = formatter.format(now);
 
-    // dynamic ref;
+    dynamic ref;
 
-    // addDetails() {
-    //   ref = firestore.collection("places").doc(id).set({
-    //     "state": 'nairobi',
-    //     "name": 'nairobi market',
-    //     "location": 'CBD',
-    //     "latitude": '1.286389',
-    //     "longitude": '36.817223',
-    //     "description": 'nairobi town is a town in nairobi',
-    //     "imageUrl1":
-    //         'https://c8.alamy.com/comp/T43F7A/the-hilton-nairobi-hotel-building-and-central-business-district-cbd-nairobi-kenya-T43F7A.jpg',
-    //     "imageUrl2":
-    //         'https://as1.ftcdn.net/v2/jpg/05/99/69/38/1000_F_599693872_ea7KjY6zgJAagy296zAoFwbnBLTEH7Q7.jpg',
-    //     "imageUrl3":
-    //         'https://i.natgeofe.com/n/e3d8e994-ede1-45d9-91da-cf06e60d4bf3/nairobi_nairobi-skyline.jpg',
-    //     "loves": '10',
-    //     "commentsCount": 'comments count',
-    //     "date": dateNow,
-    //     "timestamp": dateNow
-    //   });
+    addDetails() {
+      ref = firestore.collection("places").doc(id).set({
+        "state": 'nairobi',
+        "name": 'nairobi market',
+        "location": 'CBD',
+        "latitude": 1.286389,
+        "longitude": 36.817223,
+        "description": 'nairobi town is a town in nairobi',
+        "imageUrl1":
+            'https://c8.alamy.com/comp/T43F7A/the-hilton-nairobi-hotel-building-and-central-business-district-cbd-nairobi-kenya-T43F7A.jpg',
+        "imageUrl2":
+            'https://as1.ftcdn.net/v2/jpg/05/99/69/38/1000_F_599693872_ea7KjY6zgJAagy296zAoFwbnBLTEH7Q7.jpg',
+        "imageUrl3":
+            'https://i.natgeofe.com/n/e3d8e994-ede1-45d9-91da-cf06e60d4bf3/nairobi_nairobi-skyline.jpg',
+        "loves": '10',
+        "commentsCount": 'comments count',
+        "date": dateNow,
+        "timestamp": dateNow
+      });
 
-    //   return ref;
-    // }
+      return ref;
+    }
 
-    // addDetails();
+    addDetails();
 
     final GoogleSignInAccount? googleUser = await _googlSignIn.signIn();
     if (googleUser != null) {

@@ -52,13 +52,21 @@ class FeaturedBloc with ChangeNotifier {
       QuerySnapshot rawData;
       rawData = await firestore
           .collection('places')
-          .where('timestamp', whereIn: featuredList)
-          .limit(10)
+          // .where('timestamp', whereIn: featuredList)
+          // .limit(10)
           .get();
 
       List<DocumentSnapshot> _snap = [];
       _snap.addAll(rawData.docs);
-      _data = _snap.map((e) => Place.fromFirestore(e)).toList();
+
+      _data = _snap.map((e) {
+        // continue  from here 
+     Map<dynamic, dynamic>? = e.data();
+
+        return Place.fromFirestore(e);
+      }).toList();
+      print("----this is ${_data.length} --value");
+
       _data.sort((a, b) => b.timestamp!.compareTo(a.timestamp!));
       if (_data.isEmpty) {
         _hasData = false;

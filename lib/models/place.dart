@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Place {
@@ -16,26 +15,27 @@ class Place {
   String? date;
   String? timestamp;
 
-  Place({
-    this.state,
-    this.name,
-    this.location,
-    this.latitude,
-    this.longitude,
-    this.description,
-    this.imageUrl1,
-    this.imageUrl2,
-    this.imageUrl3,
-    this.loves,
-    this.commentsCount,
-    this.date,
-    this.timestamp
-    
-  });
+  Place(
+      {this.state,
+      this.name,
+      this.location,
+      this.latitude,
+      this.longitude,
+      this.description,
+      this.imageUrl1,
+      this.imageUrl2,
+      this.imageUrl3,
+      this.loves,
+      this.commentsCount,
+      this.date,
+      this.timestamp});
 
-
-  factory Place.fromFirestore(DocumentSnapshot snapshot){
+  factory Place.fromFirestore(DocumentSnapshot snapshot) {
     Map d = snapshot.data() as Map<dynamic, dynamic>;
+    print("--${d.length}---");
+    for (var i = 0; i < d.length; i++) {
+      print(d);
+    }
     return Place(
       state: d['state'],
       name: d['place name'],
@@ -49,9 +49,7 @@ class Place {
       loves: d['loves'],
       commentsCount: d['comments count'],
       date: d['date'],
-      timestamp: d['timestamp'], 
-
-
+      timestamp: d['timestamp'],
     );
   }
 }
