@@ -275,8 +275,12 @@ class _SignInPageState extends State<SignInPage> {
                     width: MediaQuery.of(context).size.width * 0.80,
                     child: TextButton(
                         onPressed: () => 
+                        
+                        // Authentication.signInWithGoogle(context: context),
+                        
+                         handleGoogleSignIn(),
                         // Changed this line 
-                        Authentication.signInWithGoogle(context: context),
+                      
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.blueAccent),
                           shape: MaterialStateProperty.resolveWith((states) => RoundedRectangleBorder(

@@ -71,68 +71,117 @@ class SignInBloc extends ChangeNotifier {
 
   Future signInWithGoogle({required BuildContext context}) async {
 
-    User? user;
+      final GoogleSignInAccount? googleUser = await _googlSignIn.signIn();
+  if (googleUser != null) {
+    try {
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
-    if (kIsWeb) {
-      GoogleAuthProvider authProvider = GoogleAuthProvider();
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-      try {
-        final UserCredential userCredential =
-            await _firebaseAuth.signInWithPopup(authProvider);
+      User userDetails = (await _firebaseAuth.signInWithCredential(credential)).user!;
 
-        user = userCredential.user;
-      } catch (e) {
-        print(e);
-      }
-    } else {
-      try {
-            //  final GoogleSignIn googleSignIn = GoogleSignIn();
+      this._name = userDetails.displayName;
+      this._email = userDetails.email;
+      this._imageUrl = userDetails.photoURL;
+      this._uid = userDetails.uid;
+      this._signInProvider = 'google';
 
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googlSignIn.signIn();
-
-      if (googleSignInAccount != null) {
-        final GoogleSignInAuthentication googleSignInAuthentication =
-            await googleSignInAccount.authentication;
-
-        final AuthCredential credential = GoogleAuthProvider.credential(
-          accessToken: googleSignInAuthentication.accessToken,
-          idToken: googleSignInAuthentication.idToken,
-        );
-
-        try {
-          final UserCredential userCredential =
-              await _firebaseAuth.signInWithCredential(credential);
-
-          user = userCredential.user;
-          this._name = user!.displayName;
-          this._email = user.email;
-          this._imageUrl = user.photoURL;
-          this._uid = user.uid;
-          this._signInProvider = 'google';
-          _hasError = false;
-          notifyListeners();
-          
-        } on FirebaseAuthException catch (e) {
-          if (e.code == 'account-exists-with-different-credential') {
-            // ...
-          } else if (e.code == 'invalid-credential') {
-            // ...
-          }
-        } catch (e) {
-          _hasError = true;
-          _errorCode = e.toString();
-          notifyListeners();
-          // ...
-        }
-      }
-
-
-      } catch (e) {
-        print("-------------------------------------------------\n ------------- got this error $e -------------------\n-----------------------------\n   ");
-      }
- 
+      _hasError = false;
+      notifyListeners();
+    } catch (e) {
+      _hasError = true;
+      _errorCode = e.toString();
+      notifyListeners();
     }
+  } else {
+    _hasError = true;
+    notifyListeners();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // User? user;
+
+    // if (kIsWeb) {
+    //   GoogleAuthProvider authProvider = GoogleAuthProvider();
+
+    //   try {
+    //     final UserCredential userCredential =
+    //         await _firebaseAuth.signInWithPopup(authProvider);
+
+    //     user = userCredential.user;
+    //   } catch (e) {
+    //     print(e);
+    //   }
+    // } else {
+    //   try {
+    //         //  final GoogleSignIn googleSignIn = GoogleSignIn();
+
+    //   final GoogleSignInAccount? googleSignInAccount =
+    //       await _googlSignIn.signIn();
+
+    //   if (googleSignInAccount != null) {
+    //     final GoogleSignInAuthentication googleSignInAuthentication =
+    //         await googleSignInAccount.authentication;
+
+    //     final AuthCredential credential = GoogleAuthProvider.credential(
+    //       accessToken: googleSignInAuthentication.accessToken,
+    //       idToken: googleSignInAuthentication.idToken,
+    //     );
+
+    //     try {
+    //       final UserCredential userCredential =
+    //           await _firebaseAuth.signInWithCredential(credential);
+
+    //       user = userCredential.user;
+    //       this._name = user!.displayName;
+    //       this._email = user.email;
+    //       this._imageUrl = user.photoURL;
+    //       this._uid = user.uid;
+    //       this._signInProvider = 'google';
+    //       _hasError = false;
+    //       notifyListeners();
+          
+    //     } on FirebaseAuthException catch (e) {
+    //       if (e.code == 'account-exists-with-different-credential') {
+    //         // ...
+    //       } else if (e.code == 'invalid-credential') {
+    //         // ...
+    //       }
+    //     } catch (e) {
+    //       _hasError = true;
+    //       _errorCode = e.toString();
+    //       notifyListeners();
+    //       // ...
+    //     }
+    //   }
+
+
+    //   } catch (e) {
+    //     print("-------------------------------------------------\n ------------- got this error $e -------------------\n-----------------------------\n   ");
+    //   }
+ 
+    // }
   }
 
   // final GoogleSignInAccount? googleUser = await _googlSignIn.signIn();
